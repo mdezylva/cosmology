@@ -1,0 +1,1017 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Cosmology Assignment}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+ PHYC90009 Assignment
+
+\#\#
+
+How much of the sky is covered by galaxies?
+
+Our aim in this report is to calculate the proportion of the sky that is
+covered by galaxies, through the implementation of the Press-Schechter
+Mass Function
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZlt{}script\PYZgt{}}
+        \PY{l+s+s1}{code\PYZus{}show=true; }
+        \PY{l+s+s1}{function code\PYZus{}toggle() }\PY{l+s+s1}{\PYZob{}}
+        \PY{l+s+s1}{ if (code\PYZus{}show)}\PY{l+s+s1}{\PYZob{}}
+        \PY{l+s+s1}{ \PYZdl{}(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{div.input}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{).hide();}
+        \PY{l+s+s1}{ \PYZcb{} else }\PY{l+s+s1}{\PYZob{}}
+        \PY{l+s+s1}{ \PYZdl{}(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{div.input}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{).show();}
+        \PY{l+s+s1}{ \PYZcb{}}
+        \PY{l+s+s1}{ code\PYZus{}show = !code\PYZus{}show}
+        \PY{l+s+s1}{\PYZcb{} }
+        \PY{l+s+s1}{\PYZdl{}( document ).ready(code\PYZus{}toggle);}
+        \PY{l+s+s1}{\PYZlt{}/script\PYZgt{}}
+        \PY{l+s+s1}{The raw code for this IPython notebook is by default hidden for easier reading.}
+        \PY{l+s+s1}{To toggle on/off the raw code, click \PYZlt{}a href=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{javascript:code\PYZus{}toggle()}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZgt{}here\PYZlt{}/a\PYZgt{}.}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \subsection{Packages}\label{packages}
+
+Numpy, Scipy, Matplotlib
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{integrate} \PY{k}{import} \PY{n}{quad}\PY{p}{,} \PY{n}{dblquad}\PY{p}{,} \PY{n}{simps}\PY{p}{,}\PY{n}{nquad}\PY{p}{,} \PY{n}{trapz}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.print\PYZus{}figure\PYZus{}kwargs = \PYZob{}\PYZsq{}bbox\PYZus{}inches\PYZsq{}:\PYZsq{}tight\PYZsq{}\PYZcb{}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.dpi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{100}
+\end{Verbatim}
+
+    \subsection{Constants}\label{constants}
+
+\subparagraph{Speed of Light m s-1}\label{speed-of-light-m-s-1}
+
+\[c = 299792458 \] \#\#\#\#\# Reduced Hubble Const \[h = 0.7\]
+\#\#\#\#\# Omega for Curvature \[\Omega_k = 0 \] \#\#\#\#\# Omega Matter
+\[\Omega_m = 0.3\] \#\#\#\#\# Omega Dark Energy \[\Omega_\lambda = 0.7\]
+\#\#\#\#\# Omega Radiation \[\Omega_r = 0.0\] \#\#\#\#\# Spectral Index
+\[n = 1\] \#\#\#\#\# Variance at 8 MPC \[\sigma_8 = 0.9\] \#\#\#\#\#
+Gravitational Constant \[G = 6.67e-11\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{h\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{67.66} \PY{c+c1}{\PYZsh{}Hubble Const from Planck km s\PYZhy{}1 Mpc\PYZhy{}1}
+        \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{299792458} \PY{c+c1}{\PYZsh{}Speed of Light m s\PYZhy{}1}
+        \PY{n}{h} \PY{o}{=} \PY{l+m+mf}{0.7} \PY{c+c1}{\PYZsh{}Reduced Hubble Const}
+        \PY{n}{om\PYZus{}k} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{}Omega for Curvature}
+        \PY{n}{om\PYZus{}m} \PY{o}{=} \PY{l+m+mf}{0.3} \PY{c+c1}{\PYZsh{}Omega Matter}
+        \PY{n}{om\PYZus{}lam} \PY{o}{=} \PY{l+m+mf}{0.7} \PY{c+c1}{\PYZsh{}Omega Dark Energy}
+        \PY{n}{om\PYZus{}r} \PY{o}{=} \PY{l+m+mf}{0.0} \PY{c+c1}{\PYZsh{}Omega Radiation}
+        \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{1} 
+        \PY{n}{sig\PYZus{}8} \PY{o}{=} \PY{l+m+mf}{0.9}
+        \PY{n}{G} \PY{o}{=} \PY{l+m+mf}{6.67e\PYZhy{}11} \PY{c+c1}{\PYZsh{} m3 kg\PYZhy{}1 s\PYZhy{}2}
+        \PY{n}{d\PYZus{}h0} \PY{o}{=} \PY{n}{c}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{/}\PY{n}{h\PYZus{}0} \PY{c+c1}{\PYZsh{} Hubble dist at current time }
+\end{Verbatim}
+
+    \subsubsection{1) a) Compute and Plot the Angular Diamter Distance as a
+Function of
+Redshift}\label{a-compute-and-plot-the-angular-diamter-distance-as-a-function-of-redshift}
+
+Angular Diamter Distance \(d_A\) is given by the expression
+\[ d_A = \frac{r_{em}}{1 + z}\] Where \(r_{em}\) is the comoving
+distance, given by \[ r_{em} = \int_0^z d_h dz' \] z is redshift, d\_h
+is the Hubble Distance, given by \[ d_h = \frac{c}{H(z)} \]
+\[ \Rightarrow d_A = \frac{c}{1+z} \int_0^z \frac{dz'}{H(z)} \]
+
+In order to calculate this, we construct a range of redshifts, and
+perform an integral over the \(d_h\) function for all the values, then
+graph the resulting array against our range of redshifts, remembering to
+be careful about units.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)}
+        \PY{k}{def} \PY{n+nf}{d\PYZus{}h}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{h\PYZus{}0}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{om\PYZus{}m}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{+} \PY{n}{om\PYZus{}lam}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{r\PYZus{}em} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{zed}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{d\PYZus{}h}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{zed}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{zed} \PY{o+ow}{in} \PY{n}{z}\PY{p}{]}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Angular Diamter Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Redshift z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Angular Diamter Distance [Mpc]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}Need to Correct Units here!}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} <matplotlib.legend.Legend at 0x7f4ddda35b00>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{1) b) Compute and Plot the Growth Function as a Function
+of
+Redshift}\label{b-compute-and-plot-the-growth-function-as-a-function-of-redshift}
+
+The growth function as a function of redshift is given by
+\[ D(t) \propto \frac{(\Omega_\Lambda a^3 + \Omega_k a + \Omega_m)^{1/2}}{a^{3/2}} \int_0^a \frac{a'^{3/2} da'}{(\Omega_\Lambda a'^3 + \Omega_k a' + \Omega_m)^{3/2}} \]
+where \(a = \frac{1}{1+z}\) We have already stored all our \(\Omega\)'s
+as constants, so in order to calculate the Growth Function, we need to
+define an integrand, as a function of a. It is simple to redefine our
+range of redshifts as scale factor, then we simply need to compute the
+integral for our range of scale factors. Given that we know the Growth
+function must be 1 at redshift 0, we can scale our Growth function by
+normalising it by the value it gives at redshift 0
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Need to Change Variables to get right results}
+        \PY{k}{def} \PY{n+nf}{temp\PYZus{}func}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{3.}\PY{o}{/}\PY{l+m+mf}{2.}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{om\PYZus{}lam} \PY{o}{*} \PY{n}{a}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{+} \PY{n}{om\PYZus{}k} \PY{o}{*} \PY{n}{a} \PY{o}{+} \PY{n}{om\PYZus{}m} \PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{3.}\PY{o}{/}\PY{l+m+mf}{2.}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{D\PYZus{}t} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{om\PYZus{}lam} \PY{o}{*} \PY{n}{ay}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{+} \PY{n}{om\PYZus{}k} \PY{o}{*} \PY{n}{ay} \PY{o}{+} \PY{n}{om\PYZus{}m} \PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{ay}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{temp\PYZus{}func}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{ay}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{ay} \PY{o+ow}{in} \PY{n}{a}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Normalise D\PYZus{}t using z=0}
+        \PY{n}{D\PYZus{}t\PYZus{}norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{om\PYZus{}lam} \PY{o}{*} \PY{l+m+mi}{1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{+} \PY{n}{om\PYZus{}k} \PY{o}{*} \PY{l+m+mi}{1} \PY{o}{+} \PY{n}{om\PYZus{}m} \PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{temp\PYZus{}func}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} 
+        
+        \PY{n}{D\PYZus{}t} \PY{o}{=} \PY{n}{D\PYZus{}t}\PY{o}{/}\PY{n}{D\PYZus{}t\PYZus{}norm}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{z}\PY{p}{,}\PY{n}{D\PYZus{}t}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Growth Function}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Redshift z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} <matplotlib.legend.Legend at 0x7f4ddd95fe80>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{\texorpdfstring{1) c) Compute and plot the variance on a
+mass scale \(M\) at redshift
+\(z\)}{1) c) Compute and plot the variance on a mass scale M at redshift z}}\label{c-compute-and-plot-the-variance-on-a-mass-scale-m-at-redshift-z}
+
+The variance of the Mass Scale is given by the expression
+\[\sigma^2 (m) = \sigma^2 (R) = \frac{1}{2 \pi^2} \int_0^\infty dk k^2 P(k) \Bigg[ \frac{3 j_1(kR) }{kR} \Bigg]^2\]
+Where \[ j_1 = \frac{\sin(x) - x \cos(x) }{x^2} \] We use an
+approximation to the Power Spectrum where \[ P(k) \propto k^n T^2(k) \]
+\[ T(k) = \frac{\ln(1+2.34q)}{2.34 q} [1+3.89q+(16.1q)^2 + (5.46q)^3 + (6.71q)^4]^{-1/4} \]
+\[ q = \frac{k}{\Omega_m^z h^2} \]
+\[ \Omega_m^z = \frac{\Omega_m (1+z)^3}{\Omega_m (1+z)^3 + \Omega_{\Lambda} + \Omega_k(1+z)^2}\]
+
+In order to calculate this, the sub-factors must be calculated first,
+and passed through the functions in a bootstrap fashion. We also have to
+note that
+\[ M = \frac{4 \pi R^3 \rho_M}{3} \Rightarrow R = \Big(\frac{3 M}{4 \pi \rho_M}\Big)^{1/3}\]
+All of these terms have to be calculated at \(z=0\), and we evolve them
+to higher redshifts using the growth factor \(D\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Density in Solar Masses per megaparsec\PYZca{}3}
+        \PY{n}{rho\PYZus{}crit} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n}{h\PYZus{}0}\PY{o}{*}\PY{l+m+mf}{3.241e\PYZhy{}20}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{8}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{G}\PY{o}{*}\PY{l+m+mf}{6.769e\PYZhy{}38}\PY{p}{)}
+        \PY{n}{rho\PYZus{}m} \PY{o}{=} \PY{n}{om\PYZus{}m}\PY{o}{*}\PY{n}{rho\PYZus{}crit}
+        \PY{c+c1}{\PYZsh{}Generate Mass Space}
+        \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}Convert to Radius (Units = Mpc)}
+        \PY{n}{r} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{m}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{rho\PYZus{}m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{j\PYZus{}1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{q}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}\PY{p}{(}\PY{n}{k}\PY{o}{/}\PY{p}{(}\PY{n}{om\PYZus{}m}\PY{o}{*}\PY{n}{h}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{t\PYZus{}k}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+            \PY{n}{first} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{l+m+mf}{2.34}\PY{o}{*}\PY{n}{q}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{2.34}\PY{o}{*}\PY{n}{q}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{second} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{l+m+mf}{3.89}\PY{o}{*}\PY{n}{q}\PY{p}{(}\PY{n}{k}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{16.1}\PY{o}{*}\PY{n}{q}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{5.46}\PY{o}{*}\PY{n}{q}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{6.71}\PY{o}{*}\PY{n}{q}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(} \PY{n}{first}\PY{o}{*}\PY{n}{second} \PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{P\PYZus{}k}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{k} \PY{o}{*} \PY{p}{(}\PY{n}{t\PYZus{}k}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{sigma\PYZus{}integrand}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{r}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}\PY{p}{(}\PY{n}{k}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{P\PYZus{}k}\PY{p}{(}\PY{n}{k}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3} \PY{o}{*} \PY{n}{j\PYZus{}1}\PY{p}{(}\PY{n}{k}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{k}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{sigma\PYZus{}8\PYZus{}int} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{sigma\PYZus{}integrand}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{inf}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{o}{/}\PY{n}{h}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}print(sigma\PYZus{}8\PYZus{}int)}
+        \PY{n}{const\PYZus{}s8} \PY{o}{=} \PY{l+m+mf}{0.9}\PY{o}{/}\PY{n}{sigma\PYZus{}8\PYZus{}int}
+        \PY{c+c1}{\PYZsh{}print(const\PYZus{}s8)}
+        
+        \PY{c+c1}{\PYZsh{}Perform Integral over k, passing radii to function as you go}
+        \PY{n}{var\PYZus{}z\PYZus{}0} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{const\PYZus{}s8}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{sigma\PYZus{}integrand}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{inf}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{ar}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{ar} \PY{o+ow}{in} \PY{n}{r}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}Scale at higher redshifts using Growth Factor}
+        \PY{n}{var\PYZus{}z\PYZus{}5} \PY{o}{=} \PY{p}{[}\PY{n}{zed}\PY{o}{*}\PY{n}{D\PYZus{}t}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]} \PY{k}{for} \PY{n}{zed} \PY{o+ow}{in} \PY{n}{var\PYZus{}z\PYZus{}0}\PY{p}{]}
+        \PY{n}{var\PYZus{}z\PYZus{}10} \PY{o}{=} \PY{p}{[}\PY{n}{zed}\PY{o}{*}\PY{n}{D\PYZus{}t}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]} \PY{k}{for} \PY{n}{zed} \PY{o+ow}{in} \PY{n}{var\PYZus{}z\PYZus{}0}\PY{p}{]}
+        \PY{n}{var\PYZus{}z\PYZus{}20} \PY{o}{=} \PY{p}{[}\PY{n}{zed}\PY{o}{*}\PY{n}{D\PYZus{}t}\PY{p}{[}\PY{l+m+mi}{20}\PY{p}{]} \PY{k}{for} \PY{n}{zed} \PY{o+ow}{in} \PY{n}{var\PYZus{}z\PYZus{}0}\PY{p}{]}
+        \PY{n}{var\PYZus{}z\PYZus{}30} \PY{o}{=} \PY{p}{[}\PY{n}{zed}\PY{o}{*}\PY{n}{D\PYZus{}t}\PY{p}{[}\PY{l+m+mi}{30}\PY{p}{]} \PY{k}{for} \PY{n}{zed} \PY{o+ow}{in} \PY{n}{var\PYZus{}z\PYZus{}0}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{var\PYZus{}z\PYZus{}0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{var\PYZus{}z\PYZus{}5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{var\PYZus{}z\PYZus{}10}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{var\PYZus{}z\PYZus{}20}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{var\PYZus{}z\PYZus{}30}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}ax.plot(m,z\PYZus{}5,\PYZsq{}r\PYZhy{}\PYZsq{},label=\PYZsq{}z = 5\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}ax.plot(k[:500],integrand(k,10,1)[:500],\PYZsq{}b\PYZhy{}\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}ax.set\PYZus{}xscale(\PYZdq{}log\PYZdq{})}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solar Masses \PYZdl{}M\PYZus{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{odot\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sigma(m)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{1) d) the Press - Schechter mass function of DM halos (at a
+range of
+redshifts)}\label{d-the-press---schechter-mass-function-of-dm-halos-at-a-range-of-redshifts}
+
+The Press-Schechter Mass Function is given by
+\[\frac{d n_h (m,z)}{dm} = - \sqrt{\frac{2}{\pi}} \frac{\rho_m}{m} \frac{d[\log{\sigma(m)}]}{dm} \nu_c \exp\Big(-\frac{\nu_c^2}{2} \Big)\]
+Where \[\nu_c = \delta_c (z) \sigma(m) \] Again, \(\sigma(m)\), and
+\(\rho_m\) are calculated at \(z=0\)
+
+We know that \(\delta_c(z=0) = 1.69\), and we can evolve the critical
+density backwards using the growth factor
+\[ \delta_c(z) = \frac{1.69}{D(z)}\] We can also approximate the
+derivative term
+\[\frac{d[\log{\sigma(m)}]}{dm} \approx \frac{\log\sigma(m+\Delta m) - \log\sigma(m)}{\Delta m} \approx \frac{\ln\sigma(1.1m) - \ln\sigma(m)}{1.1m-m}\]
+
+My method of implementation here involves utilising arrays generated
+from the variance, and passing their values through the functional form
+of the Press-Schechter to give useful values. I subsequently had to
+actually functionise this process, since it aids the calculation of the
+optical depth to simply have a Press-Schechter function defined.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{d\PYZus{}c}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:} 
+            \PY{k}{return}\PY{p}{(}\PY{l+m+mf}{1.69}\PY{o}{/}\PY{n}{D\PYZus{}t}\PY{p}{[}\PY{n}{z}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}Initialise variational term for mass, and generate second set of R values}
+        \PY{n}{second\PYZus{}m} \PY{o}{=} \PY{l+m+mf}{1.1}\PY{o}{*}\PY{n}{m}
+        \PY{n}{second\PYZus{}r}  \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{second\PYZus{}m}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{rho\PYZus{}m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}Calcualte variance at 1.1m }
+        \PY{n}{var\PYZus{}z\PYZus{}0\PYZus{}1pt1} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{const\PYZus{}s8}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{sigma\PYZus{}integrand}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{inf}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{ar}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{ar} \PY{o+ow}{in} \PY{n}{second\PYZus{}r}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}Compute Differential Term}
+        \PY{n}{diff\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{var\PYZus{}z\PYZus{}0\PYZus{}1pt1}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{var\PYZus{}z\PYZus{}0}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{second\PYZus{}m}\PY{o}{\PYZhy{}}\PY{n}{m}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Compute the Nu values for various redshifts}
+        \PY{n}{nu\PYZus{}z0} \PY{o}{=} \PY{n}{d\PYZus{}c}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{/}\PY{n}{var\PYZus{}z\PYZus{}0}
+        \PY{n}{nu\PYZus{}z5} \PY{o}{=} \PY{n}{d\PYZus{}c}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{/}\PY{n}{var\PYZus{}z\PYZus{}0}
+        \PY{n}{nu\PYZus{}z10} \PY{o}{=} \PY{n}{d\PYZus{}c}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{/}\PY{n}{var\PYZus{}z\PYZus{}0}
+        \PY{n}{nu\PYZus{}z20} \PY{o}{=} \PY{n}{d\PYZus{}c}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{o}{/}\PY{n}{var\PYZus{}z\PYZus{}0}
+        \PY{n}{nu\PYZus{}z30} \PY{o}{=} \PY{n}{d\PYZus{}c}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{/}\PY{n}{var\PYZus{}z\PYZus{}0}
+        
+        \PY{c+c1}{\PYZsh{}Compute the ratio of masses }
+        \PY{n}{dn\PYZus{}dm\PYZus{}z0} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{o}{*} \PY{n}{rho\PYZus{}m}\PY{o}{/}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{diff\PYZus{}term} \PY{o}{*} \PY{n}{nu\PYZus{}z0}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{nu\PYZus{}z0}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{dn\PYZus{}dm\PYZus{}z5} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{o}{*} \PY{n}{rho\PYZus{}m}\PY{o}{/}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{diff\PYZus{}term} \PY{o}{*} \PY{n}{nu\PYZus{}z5}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{nu\PYZus{}z5}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{dn\PYZus{}dm\PYZus{}z10} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{o}{*} \PY{n}{rho\PYZus{}m}\PY{o}{/}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{diff\PYZus{}term} \PY{o}{*} \PY{n}{nu\PYZus{}z10}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{nu\PYZus{}z10}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{dn\PYZus{}dm\PYZus{}z20} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{o}{*} \PY{n}{rho\PYZus{}m}\PY{o}{/}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{diff\PYZus{}term} \PY{o}{*} \PY{n}{nu\PYZus{}z20}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{nu\PYZus{}z20}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{dn\PYZus{}dm\PYZus{}z30} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{o}{*} \PY{n}{rho\PYZus{}m}\PY{o}{/}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{diff\PYZus{}term} \PY{o}{*} \PY{n}{nu\PYZus{}z30}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{nu\PYZus{}z30}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{press\PYZus{}schecter}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{r} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{M}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{rho\PYZus{}m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}   print(\PYZdq{}r=\PYZdq{} + str(r))}
+        
+            \PY{n}{var} \PY{o}{=} \PY{p}{(}\PY{n}{const\PYZus{}s8}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{sigma\PYZus{}integrand}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{inf}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{r}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}  print(\PYZdq{}var=\PYZdq{} + str(var))}
+            \PY{n}{second\PYZus{}m} \PY{o}{=} \PY{l+m+mf}{1.1}\PY{o}{*}\PY{n}{M}
+           \PY{c+c1}{\PYZsh{} print(\PYZdq{}second\PYZus{}m=\PYZdq{}+str(second\PYZus{}m))}
+            \PY{n}{second\PYZus{}r}  \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{second\PYZus{}m}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{rho\PYZus{}m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+           \PY{c+c1}{\PYZsh{} print(\PYZdq{}second\PYZus{}r=\PYZdq{}+str(second\PYZus{}r))}
+            \PY{c+c1}{\PYZsh{}Calcualte variance at 1.1m }
+            \PY{n}{var\PYZus{}1pt1} \PY{o}{=} \PY{p}{(}\PY{n}{const\PYZus{}s8}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{sigma\PYZus{}integrand}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{inf}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{second\PYZus{}r}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+           \PY{c+c1}{\PYZsh{} print(\PYZdq{}var1pt1=\PYZdq{}+str(var\PYZus{}1pt1))}
+            \PY{c+c1}{\PYZsh{}Compute Differential Term}
+            \PY{n}{diff\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{var\PYZus{}1pt1}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{var}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{second\PYZus{}m}\PY{o}{\PYZhy{}}\PY{n}{M}\PY{p}{)}
+           \PY{c+c1}{\PYZsh{} print(\PYZdq{}diff\PYZus{}term=\PYZdq{}+str(diff\PYZus{}term))}
+            \PY{c+c1}{\PYZsh{}Compute the Nu values for various redshifts}
+            \PY{n}{nu} \PY{o}{=} \PY{n}{d\PYZus{}c}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{n}{var}
+           \PY{c+c1}{\PYZsh{} print(\PYZdq{}nu=\PYZdq{}+str(nu))}
+            \PY{c+c1}{\PYZsh{}Compute the ratio of masses }
+            \PY{n}{dn\PYZus{}dm} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{o}{*} \PY{n}{rho\PYZus{}m}\PY{o}{/}\PY{p}{(}\PY{n}{M}\PY{p}{)} \PY{o}{*} \PY{n}{diff\PYZus{}term} \PY{o}{*} \PY{n}{nu}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{nu}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{dn\PYZus{}dm}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{,}\PY{l+m+mf}{1e7}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{m}\PY{o}{*}\PY{n}{dn\PYZus{}dm\PYZus{}z0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{m}\PY{o}{*}\PY{n}{dn\PYZus{}dm\PYZus{}z5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{m}\PY{o}{*}\PY{n}{dn\PYZus{}dm\PYZus{}z10}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{m}\PY{o}{*}\PY{n}{dn\PYZus{}dm\PYZus{}z20}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{m}\PY{o}{*}\PY{n}{dn\PYZus{}dm\PYZus{}z30}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solar Masses \PYZdl{}M\PYZus{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{odot\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}m*dn/dm [Mpc\PYZca{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZhy{}3\PYZcb{}]\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{\texorpdfstring{2) a) For halos of mass \(M\) at redshift
+\(z\) calculate and plot the virial radius of dark matter halos, and the
+radius of a galaxy
+disk}{2) a) For halos of mass M at redshift z calculate and plot the virial radius of dark matter halos, and the radius of a galaxy disk}}\label{a-for-halos-of-mass-m-at-redshift-z-calculate-and-plot-the-virial-radius-of-dark-matter-halos-and-the-radius-of-a-galaxy-disk}
+
+In order to calculate this, we need to utilise \[d = \Omega_m^z - 1 \]
+\[\Delta_c = 18\pi^2 + 82 d - 39d^2 \]
+\[ r_{vir} = 0.784 \Big( \frac{M}{10^{8} h^{-1} M_{\odot}} \Big)^{1/3} \Big[ \frac{\Omega_m}{\Omega_m^z} \frac{\Delta_c}{18\pi^2} \Big] \Big( \frac{1+z}{10} \Big)^{-1} h^{-1} \text{kpc} \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{def} \PY{n+nf}{om\PYZus{}m\PYZus{}z}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:} 
+             \PY{k}{return}\PY{p}{(}\PY{p}{(}\PY{n}{om\PYZus{}m} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{om\PYZus{}m} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)} \PY{o}{+} \PY{n}{om\PYZus{}lam} \PY{o}{+} \PY{n}{om\PYZus{}k} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{d}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{n}{om\PYZus{}m\PYZus{}z}\PY{p}{(}\PY{n}{z}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{del\PYZus{}crit}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{l+m+mi}{18}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{82} \PY{o}{*} \PY{n}{d}\PY{p}{(}\PY{n}{z}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{39}\PY{o}{*} \PY{n}{d}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{vir\PYZus{}r}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mass\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{8} \PY{o}{*} \PY{n}{h}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{n}{density\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{n}{om\PYZus{}m} \PY{o}{*} \PY{n}{del\PYZus{}crit}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{om\PYZus{}m\PYZus{}z}\PY{p}{(}\PY{n}{z}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{18} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{redshift\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{l+m+mf}{0.784}\PY{o}{*}\PY{n}{mass\PYZus{}term}\PY{o}{*}\PY{n}{density\PYZus{}term}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{*}\PY{n}{redshift\PYZus{}term}\PY{o}{*}\PY{n}{h}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{vel\PYZus{}crit}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{G}\PY{o}{*}\PY{l+m+mf}{6.769e\PYZhy{}38}\PY{o}{*}\PY{n}{M}\PY{p}{)}\PY{o}{/}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{vir\PYZus{}r\PYZus{}z0} \PY{o}{=} \PY{p}{[}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{em}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)} \PY{k}{for} \PY{n}{em} \PY{o+ow}{in} \PY{n}{m}\PY{p}{]}
+         \PY{n}{vir\PYZus{}r\PYZus{}z5} \PY{o}{=} \PY{p}{[}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{em}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)} \PY{k}{for} \PY{n}{em} \PY{o+ow}{in} \PY{n}{m}\PY{p}{]}
+         \PY{n}{vir\PYZus{}r\PYZus{}z10} \PY{o}{=} \PY{p}{[}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{em}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)} \PY{k}{for} \PY{n}{em} \PY{o+ow}{in} \PY{n}{m}\PY{p}{]}
+         \PY{n}{vir\PYZus{}r\PYZus{}z20} \PY{o}{=} \PY{p}{[}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{em}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)} \PY{k}{for} \PY{n}{em} \PY{o+ow}{in} \PY{n}{m}\PY{p}{]}
+         \PY{n}{vir\PYZus{}r\PYZus{}z30} \PY{o}{=} \PY{p}{[}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{em}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)} \PY{k}{for} \PY{n}{em} \PY{o+ow}{in} \PY{n}{m}\PY{p}{]}
+         
+         \PY{n}{disk\PYZus{}r\PYZus{}z0} \PY{o}{=} \PY{p}{[}\PY{n}{r}\PY{o}{/}\PY{l+m+mf}{40.} \PY{k}{for} \PY{n}{r} \PY{o+ow}{in} \PY{n}{vir\PYZus{}r\PYZus{}z0}\PY{p}{]}
+         \PY{n}{disk\PYZus{}r\PYZus{}z5} \PY{o}{=} \PY{p}{[}\PY{n}{r}\PY{o}{/}\PY{l+m+mf}{40.} \PY{k}{for} \PY{n}{r} \PY{o+ow}{in} \PY{n}{vir\PYZus{}r\PYZus{}z5}\PY{p}{]}
+         \PY{n}{disk\PYZus{}r\PYZus{}z10} \PY{o}{=} \PY{p}{[}\PY{n}{r}\PY{o}{/}\PY{l+m+mf}{40.} \PY{k}{for} \PY{n}{r} \PY{o+ow}{in} \PY{n}{vir\PYZus{}r\PYZus{}z10}\PY{p}{]}
+         \PY{n}{disk\PYZus{}r\PYZus{}z20} \PY{o}{=} \PY{p}{[}\PY{n}{r}\PY{o}{/}\PY{l+m+mf}{40.} \PY{k}{for} \PY{n}{r} \PY{o+ow}{in} \PY{n}{vir\PYZus{}r\PYZus{}z20}\PY{p}{]}
+         \PY{n}{disk\PYZus{}r\PYZus{}z30} \PY{o}{=} \PY{p}{[}\PY{n}{r}\PY{o}{/}\PY{l+m+mf}{40.} \PY{k}{for} \PY{n}{r} \PY{o+ow}{in} \PY{n}{vir\PYZus{}r\PYZus{}z30}\PY{p}{]}
+         
+         
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{figsize}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}\PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{vir\PYZus{}r\PYZus{}z0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{vir\PYZus{}r\PYZus{}z5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{vir\PYZus{}r\PYZus{}z10}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{vir\PYZus{}r\PYZus{}z20}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{vir\PYZus{}r\PYZus{}z30}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solar Masses \PYZdl{}M\PYZus{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{odot\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Virial Radius of Halo[Mpc]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{disk\PYZus{}r\PYZus{}z0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{disk\PYZus{}r\PYZus{}z5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{disk\PYZus{}r\PYZus{}z10}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{disk\PYZus{}r\PYZus{}z20}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{disk\PYZus{}r\PYZus{}z30}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solar Masses \PYZdl{}M\PYZus{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{odot\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Disk Radius [Mpc]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Angular Extent}\label{angular-extent}
+
+The angular extent of an object is given by the expression for angular
+diamater distance. We can utilise the actual size calculated above, and
+rearrange the for the angular extent
+\[ d_A = \frac{D}{\delta}  \Rightarrow \delta = \frac{D}{d_A}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{}Pass in Angular }
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{figsize}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}\PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{vir\PYZus{}r\PYZus{}z0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{]}\PY{o}{/}\PY{n}{vir\PYZus{}r\PYZus{}z5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{100}\PY{p}{]}\PY{o}{/}\PY{n}{vir\PYZus{}r\PYZus{}z10}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{]}\PY{o}{/}\PY{n}{vir\PYZus{}r\PYZus{}z20}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{299}\PY{p}{]}\PY{o}{/}\PY{n}{vir\PYZus{}r\PYZus{}z30}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solar Masses \PYZdl{}M\PYZus{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{odot\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Angular Extent of Halo[Mpc]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{disk\PYZus{}r\PYZus{}z0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{]}\PY{o}{/}\PY{n}{disk\PYZus{}r\PYZus{}z5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{100}\PY{p}{]}\PY{o}{/}\PY{n}{disk\PYZus{}r\PYZus{}z10}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{]}\PY{o}{/}\PY{n}{disk\PYZus{}r\PYZus{}z20}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{r\PYZus{}em}\PY{p}{[}\PY{l+m+mi}{299}\PY{p}{]}\PY{o}{/}\PY{n}{disk\PYZus{}r\PYZus{}z30}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z = 30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solar Masses \PYZdl{}M\PYZus{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{odot\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Angular Extent of Disk [Mpc]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Calculate and plot the minimum galaxy mass as a function of
+redshift. Note that by minimum galaxy mass we mean the minimum halo mass
+within which stars can
+form.}\label{calculate-and-plot-the-minimum-galaxy-mass-as-a-function-of-redshift.-note-that-by-minimum-galaxy-mass-we-mean-the-minimum-halo-mass-within-which-stars-can-form.}
+
+To calcualte the minimum galaxy mass, we can use the fact that in order
+for a cloud to collapse, its temperature must be approximately \(10^4\)
+Kelvin. We can then use this to calculate the circular velocity of the
+cloud using \[T_{vir} = \frac{\mu m_p V_c^2}{2 k_B}\] This can then be
+used to calcualte the mass using the equation
+\[ v_c = \Big(\frac{G M }{r_{vir}}\Big)^{1/2} \]
+
+Rearranging this using the expression for \(r_{vir}\) from above yields
+\[ m = \Big( \frac{2 k_B T_{vir} }{\mu m_p G} \Big)^{3/2} \Bigg( 0.784 \bigg( \frac{1}{10^8 h^{-1} }\bigg)^{1/3} \bigg[ \frac{\Omega_m}{\Omega_m^z} \frac{\Delta_{crit}}{18 \pi^2} \bigg] \bigg(\frac{1+z}{10} \bigg) h^{-1}  \Bigg)^{3/2}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{t\PYZus{}vir} \PY{o}{=} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{4} 
+         \PY{n}{k\PYZus{}b} \PY{o}{=} \PY{l+m+mf}{1.45e\PYZhy{}68} \PY{c+c1}{\PYZsh{}kg Mpc\PYZca{}2 s\PYZca{}\PYZhy{}2 K\PYZca{}\PYZhy{}1}
+         \PY{n}{V\PYZus{}c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{k\PYZus{}b}\PY{o}{*}\PY{n}{t\PYZus{}vir}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{l+m+mf}{1.6726219e\PYZhy{}27}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{vir\PYZus{}r\PYZus{}noM}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mass\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{8} \PY{o}{*} \PY{n}{h}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{n}{density\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{n}{om\PYZus{}m} \PY{o}{*} \PY{n}{del\PYZus{}crit}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{om\PYZus{}m\PYZus{}z}\PY{p}{(}\PY{n}{z}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{18} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{redshift\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{l+m+mf}{0.784}\PY{o}{*}\PY{n}{mass\PYZus{}term}\PY{o}{*}\PY{n}{density\PYZus{}term}\PY{o}{*}\PY{n}{redshift\PYZus{}term}\PY{o}{*}\PY{n}{h}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{min\PYZus{}mass}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{temp\PYZus{}term} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{k\PYZus{}b}\PY{o}{*}\PY{n}{t\PYZus{}vir}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{l+m+mf}{1.67e\PYZhy{}27}\PY{o}{*}\PY{n}{G}\PY{o}{*}\PY{l+m+mf}{6.769e\PYZhy{}38}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} 
+             \PY{n}{vel\PYZus{}term} \PY{o}{=} \PY{n}{vir\PYZus{}r\PYZus{}noM}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{temp\PYZus{}term}\PY{o}{*}\PY{n}{vel\PYZus{}term} \PY{o}{*} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}min\PYZus{}mass = [((2 k\PYZus{}b t\PYZus{}vir)/(2*1.67e\PYZhy{}27*G*6.769e\PYZhy{}38))**(3/2)*(0.784*((1)/(10**8 * h**(\PYZhy{}1)))**(1/3)*(om\PYZus{}m * del\PYZus{}crit(zed))/(om\PYZus{}m\PYZus{}z(zed) * 18 * np.pi**2)*((1+zed)/10)**(\PYZhy{}1))**(3/2) for zed in z]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{z}\PY{p}{,}\PY{n}{min\PYZus{}mass}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Minimum Halo Mass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Redshift}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solar Masses\PYZdl{}[Mpc\PYZca{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZhy{}3\PYZcb{}]\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Calculate the total cross - section of galaxy disks on the sky
+by integrating over all redshifts and all masses above the minimum. For
+this first estimate assume that all dark matter halos host a
+galaxy.}\label{calculate-the-total-cross---section-of-galaxy-disks-on-the-sky-by-integrating-over-all-redshifts-and-all-masses-above-the-minimum.-for-this-first-estimate-assume-that-all-dark-matter-halos-host-a-galaxy.}
+
+First we need to calculate the cross sectional area, which we can
+calculate using our expressions for the virial radius. Then we compute
+the value of the optical depth integrand, by multiplying the cross
+sectional area of a galaxy by the Press Schecter Mass function. We then
+multiply this by the scaled angular diameter distance, to scale the
+cross section.
+\[ c \frac{dt}{dz} \frac{dn_{gal}(z^\prime)}{dm} \sigma_{gal}(M,z^\prime)\]
+We then integrate this from the minimum mass at a given redshift, up to
+the maximum mass. Ultimately however, this is impractical, since beyond
+a certain mass scale, there just aren't enough gravitationally bound
+masses, and the process of computing the integral will be from some
+minimum mass to some hypothetical infinite mass. This is self evident
+when we look at the Press Schecter Mass function, beyond about
+\(10^{16}\), the number of virialised, bound halos drops to negligible
+amounts.
+
+Explicitly, in order to solve this, we need to perform the following
+operation:
+\[ \tau _ { g a l } = \int _ { 0 } ^ { z } \int _ { M _ { \min } } ^ { \infty } d M d z ^ { \prime } \frac{c dt}{dz^\prime} \frac {d n _ { g a l } \left( z ^ { \prime } \right) } { d M } \sigma _ { g a l } ( M , z ) \]
+
+Attempting to do this entirely analytically leads to long integration
+times, which the Python Integrator Quad struggles with, and since we end
+up not requiring the higher mass halos (due to their incredibly small
+fraction), it proves to be easier to populate a table with the value of
+the integrand, for a mass range between
+\([M_{min} , 10^{16} M_{\odot}]\), and for redshifts between \([0,19]\),
+since we don't expect many, if any, galaxies at high redshifts.
+
+This will, admittedly loose any galaxies which are truly massive, but
+given the likelyhood of them forming is incredibly low, their ultimate
+contribution to the optical depth will be very small.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{def} \PY{n+nf}{cross\PYZus{}section\PYZus{}vir}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{cross\PYZus{}section\PYZus{}disk}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{p}{(}\PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{40}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{nu}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{r} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{M}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{rho\PYZus{}m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}   print(\PYZdq{}r=\PYZdq{} + str(r))}
+         
+             \PY{n}{var} \PY{o}{=} \PY{n}{D\PYZus{}t}\PY{p}{[}\PY{n}{z}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{const\PYZus{}s8}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{quad}\PY{p}{(}\PY{n}{sigma\PYZus{}integrand}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{inf}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{r}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return}\PY{p}{(}\PY{n}{d\PYZus{}c}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{var}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{opt\PYZus{}depth\PYZus{}int\PYZus{}disk}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dn\PYZus{}dm} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{o}{*} \PY{n}{rho\PYZus{}m}\PY{o}{/}\PY{p}{(}\PY{n}{M}\PY{p}{)} \PY{o}{*} \PY{n}{diff\PYZus{}term} \PY{o}{*} \PY{n}{nu}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{nu}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{d\PYZus{}h}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{n}{press\PYZus{}schecter}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{n}{cross\PYZus{}section\PYZus{}disk}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{c+c1}{\PYZsh{}def bounds\PYZus{}m(m\PYZus{}min):}
+         \PY{c+c1}{\PYZsh{}    return([m\PYZus{}min,np.inf])}
+         
+         \PY{c+c1}{\PYZsh{}def bounds\PYZus{}z(z):}
+         \PY{c+c1}{\PYZsh{}    return([0,z])}
+         
+         \PY{c+c1}{\PYZsh{}Need Trapz Method, so need to create array of integrand, weighting early levels more than upper levels.}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{integ\PYZus{}lookup} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}print(np.shape(integ\PYZus{}lookup))}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}1st index = mass}
+         \PY{c+c1}{\PYZsh{}2nd index = redshift}
+         \PY{c+c1}{\PYZsh{}3rd index = }
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{masses} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{min\PYZus{}mass}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}    print(\PYZdq{}z=\PYZdq{}+ str(i))}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{:}
+               \PY{c+c1}{\PYZsh{}  print(\PYZdq{}j=\PYZdq{}+str(j))}
+                 \PY{n}{integ\PYZus{}lookup}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{masses}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                 \PY{n}{integ\PYZus{}lookup}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{opt\PYZus{}depth\PYZus{}int\PYZus{}disk}\PY{p}{(}\PY{n}{masses}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print(type(i))}
+             \PY{c+c1}{\PYZsh{}print(integ\PYZus{}lookup[i])}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{}print(integ\PYZus{}lookup[1][0][:])}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{second\PYZus{}integrand} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{trapz}\PY{p}{(}\PY{n}{integ\PYZus{}lookup}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{zed}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{n}{integ\PYZus{}lookup}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{zed}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{zed} \PY{o+ow}{in} \PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}print(second\PYZus{}integrand)}
+         \PY{n}{tau} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trapz}\PY{p}{(}\PY{n}{second\PYZus{}integrand}\PY{p}{)}   
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The optical depth of galaxy disks is approximately = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{tau}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The optical depth of galaxy disks is approximately = 1.2928118797986756\%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}np.save(\PYZdq{}integrands\PYZus{}final\PYZdq{},integ\PYZus{}lookup)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{}test\PYZus{}array = np.load(\PYZdq{}integrands\PYZus{}final.npy\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}print(test\PYZus{}array)}
+\end{Verbatim}
+
+    We can improve the estimate by including the effects of Baryon Cooling
+in the Press Schecter Mass Function, which previously was only sensetive
+to angular momentum conservation. In practicality, the clouds in the
+Halo need enough time to cool appropriately to form stars, and so we
+need to consider these effects. If we say that the time it takes for the
+cloud to cool is \(t_{cool}\), then there are three cases to consider: *
+\(t_{cool} > H^{-1}\): The Cloud won't cool, since it's cooling time is
+longer than the lifetime of the universe * \$t\_\{dyn\} \textless{}
+t\_\{cool\} \textless{} H\^{}\{-1\} \$: When the time to cool is longer
+than the time it takes for the cloud to free fall collapes \(t_{dyn}\),
+but shorter than the lifetime of the universe, the cloud can technically
+collapse, however the pressure waves inside the cloud can provide a
+quasi-static pressure, which slows the collapse, so the collapse is
+considered 'slow' * \(t_{cool} < t_{dyn}\): In this case, the cloud
+can't respond dynamically to energy loss, and so will undergo direct
+collapse in an analogous manner to the Jeans Collapse.
+
+\subsubsection{\texorpdfstring{Cooling Time
+\(t_{cool}\)}{Cooling Time t\_\{cool\}}}\label{cooling-time-t_cool}
+
+If we want a galaxy at the present day, we need a halo to collapse at
+redshift \(z\) such that
+\[ t(z=0) - t(z) = t_{cool} = \frac{3 \rho k_B T}{2 \mu \Lambda(T) n^2} \]
+
+For an Einstien de-Sitter Universe it can be done analyticaly, however,
+for the \(\Lambda\)CDM universe, it needs to be found using a
+root-finder.
+
+\begin{align*}
+t_{\Lambda CDM}(z) = 
+\end{align*}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{k}{def} \PY{n+nf}{T\PYZus{}vir}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{r} \PY{o}{=} \PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{)} \PY{c+c1}{\PYZsh{}Mpc}
+             \PY{n}{mu} \PY{o}{=} \PY{l+m+mf}{0.57} \PY{o}{*} \PY{l+m+mf}{1.67e\PYZhy{}27} \PY{c+c1}{\PYZsh{}kg}
+             \PY{n}{v\PYZus{}c} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{G}\PY{o}{*}\PY{l+m+mf}{6.769e\PYZhy{}38}\PY{o}{*}\PY{n}{M}\PY{p}{)}\PY{o}{/}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} 
+             \PY{n}{numer} \PY{o}{=} \PY{n}{mu} \PY{o}{*} \PY{n}{v\PYZus{}c}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n}{denom} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{k\PYZus{}b}
+             \PY{k}{return}\PY{p}{(}\PY{n}{numer}\PY{o}{/}\PY{n}{denom}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{lam}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{5.2e\PYZhy{}9} \PY{c+c1}{\PYZsh{} Bohr Radius, defined in cm}
+             \PY{n}{k} \PY{o}{=} \PY{l+m+mf}{8.61e\PYZhy{}5} \PY{c+c1}{\PYZsh{}Boltzmann Constant in eV/K}
+         \PY{c+c1}{\PYZsh{}    print(np.exp(13.6/(k*T)))}
+             \PY{n}{denom} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{a\PYZus{}0}\PY{o}{*}\PY{p}{(}\PY{n}{T\PYZus{}vir}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{o}{/}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{l+m+mf}{13.6}\PY{o}{/}\PY{p}{(}\PY{n}{k}\PY{o}{*}\PY{n}{T\PYZus{}vir}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{c+c1}{\PYZsh{}    print(denom)}
+             \PY{n}{first} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{24}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{denom}
+         \PY{c+c1}{\PYZsh{}    print(first)}
+             \PY{n}{second} \PY{o}{=} \PY{l+m+mf}{2.1}\PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{T\PYZus{}vir}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{o}{/}\PY{l+m+mi}{6}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.44} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{T\PYZus{}vir}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} print(second)}
+             \PY{k}{return}\PY{p}{(}\PY{p}{(}\PY{n}{first}\PY{o}{*}\PY{n}{second}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{H}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{n}{h\PYZus{}0}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{om\PYZus{}m}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{+} \PY{n}{om\PYZus{}lam}\PY{p}{)}\PY{p}{)}
+                             
+         \PY{k}{def} \PY{n+nf}{rho\PYZus{}crit\PYZus{}2}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{rho} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n}{H}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{3.241e\PYZhy{}20}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{8}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{G}\PY{o}{*}\PY{l+m+mf}{6.769e\PYZhy{}38}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{rho}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{t\PYZus{}cool}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mu} \PY{o}{=} \PY{l+m+mf}{0.57} \PY{o}{*} \PY{l+m+mf}{1.67e\PYZhy{}27} \PY{c+c1}{\PYZsh{} Mu defined in kgs}
+             \PY{n}{k} \PY{o}{=} \PY{l+m+mf}{1.38e\PYZhy{}23} \PY{c+c1}{\PYZsh{}k\PYZus{}b in J/K}
+             \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{rho} \PY{o}{=} \PY{l+m+mi}{18}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{rho\PYZus{}crit\PYZus{}2}\PY{p}{(}\PY{n}{z}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{6.8}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{38}\PY{p}{)}
+             \PY{n}{numer} \PY{o}{=} \PY{l+m+mi}{3}\PY{o}{*} \PY{n}{rho} \PY{o}{*} \PY{n}{k} \PY{o}{*} \PY{n}{T\PYZus{}vir}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)}
+             \PY{n}{denom} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{mu} \PY{o}{*} \PY{n}{lam}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{z}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{c+c1}{\PYZsh{}Expect 3e6 yrs for T=10\PYZca{}6 K}
+             \PY{c+c1}{\PYZsh{} For years, divide by 3.154e7}
+             \PY{k}{return}\PY{p}{(}\PY{n}{numer}\PY{o}{/}\PY{p}{(}\PY{n}{denom}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{t\PYZus{}z}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a\PYZus{}z} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z}\PY{p}{)}
+             \PY{n}{numer} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{a\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{om\PYZus{}m} \PY{o}{*} \PY{n}{a\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{)} \PY{o}{+} \PY{n}{om\PYZus{}lam}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{a\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{om\PYZus{}lam} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{om\PYZus{}lam}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{a\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{om\PYZus{}lam}\PY{o}{+}\PY{n}{om\PYZus{}m}\PY{p}{)}\PY{p}{)}
+             \PY{n}{denom} \PY{o}{=} \PY{l+m+mi}{3} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{om\PYZus{}lam}\PY{p}{)}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{a\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{om\PYZus{}lam}\PY{o}{+}\PY{n}{om\PYZus{}m}\PY{p}{)} 
+             \PY{k}{return}\PY{p}{(}\PY{n}{numer}\PY{o}{/}\PY{n}{denom}\PY{p}{)}
+         
+         \PY{n}{t\PYZus{}z}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)} 
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:} -0.5132466162057996
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{def} \PY{n+nf}{d\PYZus{}c\PYZus{}cool}\PY{p}{(}\PY{n}{z\PYZus{}col}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{1.69}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{z\PYZus{}col}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{D\PYZus{}t}\PY{p}{[}\PY{n}{z}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{rho\PYZus{}crit\PYZus{}2}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{12}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} 4.8564224592096
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{vir\PYZus{}r}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} 1374.474427576163
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-61-1a33043c3ac3> in <module>()
+    ----> 1 print(H)
+    
+
+        NameError: name 'H' is not defined
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
